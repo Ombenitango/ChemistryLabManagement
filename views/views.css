@@ -1,0 +1,37 @@
+.viewNavigation{
+    width: 100%;
+    height: 100px;
+    background-color:#d7dbea;
+    display: flex;
+    flex-direction: row;
+}
+
+#edit-btn-next{
+ height: 50px;
+ transform: translate3d(37px,30px,0px);
+
+}
+#edit-btn{
+    height: 50px;
+    transform: translate3d(30px,30px,0px);
+}
+.update{
+    position: fixed;
+    z-index: 1;
+}
+.tabledispla{
+    display: grid;
+    grid-template-columns: 1fr;
+  
+}
+
+.table-sub-update{
+    display: grid;
+    grid-template-columns: 1fr;
+    margin: 5px;
+    
+}
+.otheritems{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}

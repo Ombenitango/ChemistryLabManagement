@@ -1,0 +1,175 @@
+.centerDiv-subnav{
+    width: 100%;
+    height: 100px;
+    background-color:#d7dbea;
+    display: flex;
+    flex-direction: row;
+    justify-content:flex-end;
+    align-items: baseline;
+    
+}
+#cancelbnt{
+    transform: translate3d(0px,0px,0px);
+}
+#addbtn{
+    transform: translate3d(35px,30px,0px);
+}
+#additmes{
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    transform: translate3d(-50px,20px,0px);
+}
+.formAdditem{
+    width: 300px;
+    height: 600px;
+    right:0;
+    background-color:#9eade7;
+    position: absolute;
+    transform: translateY(50px);
+    display: none; 
+}
+.update{
+    width: 300px;
+    height: 600px;
+    right:0;
+    background-color:#9eade7;
+    transform: translateY(50px);
+    display: none; 
+   
+}
+.userprofile{
+    width: 150px;
+    height: 150px;
+    box-shadow: 1px 1px 5px 1px lightslategray;
+    top: 0;
+    bottom: 0;
+    right:0;
+    z-index: 2;
+    position: absolute;
+    background-color:#d7dbea;
+    transform: translate3d(-20px,0px,0px);
+    display: none;
+}
+.add-cancelbtn{
+ width: 100px;
+ height: 30px;
+ margin-left: 50px;
+ outline: none;
+ text-align: center;
+ border-radius:  10px;
+}
+.formo1{
+    width: 100%;
+    height: 90%;
+}
+.formo1-update{
+    width: 100%;
+    height: 90%;
+   
+}
+#addtitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    color:black;
+}
+.add-cancel{
+    margin-left: 7px;
+}
+.itemIputs{
+  width: 90%;
+  height: 30px;
+  border: 1px solid blueviolet;
+  margin-top: 10px;
+  border-radius: 10px;
+  padding-left: 5px;
+}
+.itemIputsDes{
+    width: 90%;
+    height: 100px;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding-left: 5px;
+}
+#formitemadd{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.table-sub{
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+.tablediplay{
+ display: grid;
+ grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+ box-shadow: 1px 1px 5px 1px lightgray;
+ margin: 3px;
+}
+.update-deletebtn{
+    width: 100px;
+    height: 30px;
+    margin-top: 5px;
+}
+#displaymenus{
+    display: none;
+}
+
+/* phone display here */
+
+@media screen and (max-width: 1000px) {
+    .table-sub{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 150px;
+        height: 150px
+      
+       }
+       .tablediplay{
+        display: grid;
+        grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+        box-shadow: 1px 1px 5px 1px lightgray;
+        margin: 3px;
+        overflow-x: auto;
+        overflow-y: hidden;
+       }
+       .centerDiv{
+      transform: translate3d(150px,50px,0px);
+       }
+
+}
+
+@media screen and (max-width: 700px) {
+    .table-sub{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100px;
+        height: 100px;
+        overflow-y: hidden;
+       }
+       .tablediplay{
+        display: grid;
+        grid-template-columns:1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr; 
+        box-shadow: 1px 1px 5px 1px lightgray;
+        margin: 3px;
+        overflow-x: auto;
+       }
+
+       .centerDiv{
+        transform: translate3d(0px,50px,0px);
+         }
+         #displaymenus{
+            display: block;
+        }
+}

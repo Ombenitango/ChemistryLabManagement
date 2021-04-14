@@ -1,0 +1,245 @@
+body{
+   margin: 0;
+   color: white;
+ 
+}
+/* ::-webkit-scrollbar{
+  
+} */
+.navigationBar{
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    z-index: 2;
+}
+.wholecontainer{
+    display: grid;
+    grid-template-columns:1fr 0fr;
+    
+}
+
+.leftDiv{
+ width: 15%;
+ height: 1000px;
+ display: flex;
+box-shadow: 1px 1px 0px 1px rgba(215, 219, 214, 1);
+ flex-direction: column;
+ position: fixed;
+ margin-top: 45px;
+}
+.centerDiv{
+    width: 85%;
+    height: 1000px;
+    color:black;
+    transform: translate3d(202px,45px,0px);
+
+    overflow: hidden;
+}
+.leftdiv-sub{
+    margin-top: 20px;
+}
+.griDKubwa{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    transform: translateX(100px);
+    margin: 0;
+}
+#chemistry-logohome{
+    color:white;
+    font-size: 17px;
+    font-family: sans-serif;
+    font-weight: lighter;
+    width: 90%;
+}
+.toicons{
+    margin: 5px;
+    cursor: pointer;
+}
+.links-all{
+    text-decoration: none;
+    color: black;
+    margin-left: 10px;
+}
+.Store{
+    display: flex;
+    flex-direction: row;
+   justify-content: left;
+   align-items: center; 
+    height: 40px;
+ 
+}
+.Store:hover{
+    background-color: rgba(161, 161, 161, 1);
+}
+.usage{
+    display: flex;
+    flex-direction: row; 
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    height: 40px;
+}
+.usage:hover{
+    background-color:rgba(161, 161, 161, 1);
+}
+.expired{
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    margin-top: 10px;
+    height: 40px;
+}
+.expired:hover{
+    background-color: rgba(161, 161, 161, 1);
+}
+.imgaeslink{
+    margin-left: 10px;
+}
+.iconTopNavigation{
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  align-items: center;
+}
+.cale{
+    box-shadow: 1px 1px 5px 1px lightslategray;
+    width: 98%;
+    height: 350px;
+    margin: 10px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+.grid{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    width: 100%;
+    height: 100%;
+}
+.grid-sub{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid black;
+}
+#nameuserasd{
+    transform: translateY(-200px);
+}
+.subonelastactivity{
+    box-shadow: 1px 1px 5px 1px lightslategray;
+    width: 98%;
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.userprofile{
+    width: 150px;
+    height: 150px;
+    box-shadow: 1px 1px 5px 1px lightslategray;
+    top: 0;
+    bottom: 0;
+    right:0;
+    z-index: 2;
+    position: absolute;
+    background-color:#d7dbea;
+    transform: translate3d(-20px,0px,0px);
+    display: none;
+}
+#scmsshow{
+    display: none;
+}
+#displaymenus{
+    display: none;
+}
+
+@media screen and (max-width: 1000px) {
+    .leftDiv{
+        width: 20%;
+        height: 1000px;
+        display: flex;
+        box-shadow: 1px 1px 0px 1px rgba(215, 219, 214, 1);
+        flex-direction: column;
+        position: fixed;
+        margin-top: 45px;
+       
+       }
+       .iconTopNavigation{
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        align-items: center;
+       margin-left: -50px;
+      }
+}
+
+/* Phone view here when width is  below 600 */
+@media screen and (max-width: 700px) {
+    .leftDiv{
+        width: 300px;
+        height: 1000px;
+        display: flex;
+       box-shadow: 1px 1px 0px 1px rgba(215, 219, 214, 1);
+        flex-direction: column;
+        position: fixed;
+        margin-top: 45px;
+        z-index: 2;
+        background-color: rgba(215, 219, 214, 1);
+        display: none;
+       }
+       #clmsdis{
+           display: none;
+       }
+       #scmsshow{
+           display: block;
+          transform: translate3d(40px,-25px,0px);
+       }
+       .centerDiv{
+        width: 97%;
+        height: 1000px;
+        color:black;
+        overflow: none;
+        transform: translate3d(0px,45px,0px);
+    }
+    #displaymenus{
+        display: block;
+    }
+    .cale{
+        box-shadow: 1px 1px 5px 1px lightslategray;
+        width: 100%;
+        height: 350px;
+        justify-content: center;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+    .iconTopNavigation{
+        display: flex;
+        flex-direction: row;
+        justify-content: right;
+        align-items: center;
+       margin-left: -50px;
+      }
+
+    .subonelastactivity{
+        box-shadow: 1px 1px 5px 1px lightslategray;
+        width: 100%;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+    }
+    .griDKubwa{
+        display: grid;
+        grid-template-columns: repeat(4,1fr);
+        transform: translateX(10px);
+        margin: 0;
+    }
+    .absc{
+        margin-left: 10px;
+    }
+}

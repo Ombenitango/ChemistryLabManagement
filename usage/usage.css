@@ -1,0 +1,113 @@
+.tofetchdataTocheckAvailable{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    height: 200px;
+    overflow-y: auto;
+    box-shadow: 1px 1px 5px 1px lightgray;
+    margin: 3px;
+}
+.itemshow{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.headActionane{
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+}
+#displaydate{
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 500px;
+    height: 360px;
+    background-color: rgb(248, 251, 251);
+     box-shadow:1px 1px 5px 1px rgb(170, 170, 167);
+    z-index: 2;
+    position: fixed;
+    transform: translate3d(300px,200px,0px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#imagescancle{
+    transform: translate3d(237px,-110px,0px);
+    cursor: pointer;
+}
+.itmestext{
+    font-size: 30px;
+    font-family: serif;
+    margin-top: -10px;
+}
+
+.userprofile{
+    width: 150px;
+    height: 150px;
+    box-shadow: 1px 1px 5px 1px lightslategray;
+    top: 0;
+    bottom: 0;
+    right:0;
+    z-index: 2;
+    position: absolute;
+    background-color:#d7dbea;
+    transform: translate3d(-20px,0px,0px);
+    display: none;
+}
+
+#namecoluma{
+    margin-left: 250px;
+}
+
+@media screen and (max-width: 1000px) {
+    #displaydate{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 500px;
+        height: 360px;
+        background-color: rgb(248, 251, 251);
+         box-shadow:1px 1px 5px 1px rgb(170, 170, 167);
+        z-index: 2;
+        position: fixed;
+        transform: translate3d(0px,200px,0px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #imagescancle{
+        transform: translate3d(155px,-110px,0px);
+        cursor: pointer;
+    }
+}
+@media screen and (max-width: 700px) {
+    #namecoluma{
+        margin-left: 10px;
+    }
+
+    #displaydate{
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        width: 89%;
+        height: 360px;
+        background-color: rgb(248, 251, 251);
+         box-shadow:1px 1px 5px 1px rgb(170, 170, 167);
+        z-index: 2;
+        position: fixed;
+        transform: translate3d(20px,200px,0px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #imagescancle{
+        transform: translate3d(155px,-110px,0px);
+        cursor: pointer;
+    }
+}
