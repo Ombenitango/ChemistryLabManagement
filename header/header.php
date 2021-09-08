@@ -8,7 +8,7 @@
 </head>
 <body>
 <div class="navigationBar">
-    <h1 id="chemistry-logo">CHEMISTRY LABORATORY MANAGEMENT SYSTEM</h1>
+    <h1 id="chemistry-logo"> CHEMISTRY LABORATORY MANAGEMENT SYSTEM</h1>
   </div>
 </body>
 </html>

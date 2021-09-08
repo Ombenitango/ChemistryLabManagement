@@ -6,7 +6,7 @@ if(!isset($_SESSION['username'])){
 $user=$_SESSION['username'][0];
 }
 $t=time();
-$time= date("Y/m/d/i/s",$t); 
+$time= date("Y/m/d"); 
 $timeHr=date("Y/m/d",$t);
 include('../connection.php');
 //update items,but we need to select first
@@ -39,11 +39,15 @@ if(isset($_POST['submit-update'])){
 <?php 
 $user=$_SESSION['username'][0];
 if(isset($_POST['submit-update-edit'])){
- 
     $ItemName=$_GET['viewId'];
     $i_updatename=$_POST['itemname'];
     $i_updatequantity=$_POST['quantity'];
     $selectItems="SELECT*FROM items  WHERE i_name='$ItemName'";
+
+   
+    // include("../connection.php");
+    // $selectItems="SELECT*FROM items WHERE i_expire_date<='$dateExpire'";
+    
     $resultOfselectedItems=mysqli_query($connection,$selectItems);
     if($rowOfresualt=mysqli_fetch_array($resultOfselectedItems)){
         $id=$rowOfresualt[0];
@@ -51,10 +55,14 @@ if(isset($_POST['submit-update-edit'])){
         $i_quantityH=$rowOfresualt[5];
         $i_timeH=$rowOfresualt[10];
         $i_serialH=$rowOfresualt[1];
+        $i_expire=$rowOfresualt[2];
         // update items new after 
         if($i_quantityH==0){
           header("location:../store/");
         }else{
+          $expireTime=time();
+          $dateExpire=date('Y-m-d',$expireTime);
+          if($i_expire>=$dateExpire){
           $insertHistory="INSERT INTO itemhistory(id,i_serial_no,i_name,i_quantity,i_date)VALUES(0,'$i_serialH','$i_nameH','$i_quantityH','$i_timeH')";
           if( mysqli_query($connection,$insertHistory))
           {
@@ -71,6 +79,10 @@ if(isset($_POST['submit-update-edit'])){
           }else{
             echo "Error:".mysqli_error($connection);
           }
+          }else {
+            echo "<script>alert('Items already expired');</script>";
+            
+          }
         }
        
     }
@@ -85,17 +97,17 @@ if(isset($_POST['submit-update-edit'])){
     <title>Home</title>
     <link rel="stylesheet" href="../home/home.css">
     <link rel="stylesheet" href="views.css">
-    <link rel="stylesheet" href="../Store/store.css">
+    <link rel="stylesheet" href="../store/store.css">
     <link rel="stylesheet" href="../mystyle/font.css">
 </head>
 <body>
 <div class="containerbody">
     <div class="navigationBar">
     <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis">CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
-     <div class="iconTopNavigation">
+     <!-- <div class="iconTopNavigation">
          <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
          <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons">
-     </div>
+     </div> -->
     </div>
     <div class="wholecontainer">  
         <div class="leftDiv">
@@ -113,8 +125,8 @@ if(isset($_POST['submit-update-edit'])){
             <div id="addtitle"><h4>Enter quantity used</h4></div>
            <form action="" method="post" id="formitemadd" enctype="multipart/form-data">
             <input type="text" name="itemname" id="itemnameid" placeholder=" Item name" class="itemIputs" required value="<?php echo $_GET['viewId'];?>"><br>
-            <input type="text" name="quantity" id="quantity" placeholder="Quantity" class="itemIputs" required>
-             <button type="submit" style="background-color: lightgreen;" class="add-cancelbtn" name="submit-update-edit" id="addbtn">EDIT
+            <input type="number" min ="1" name="quantity" id="quantity" placeholder="Quantity" class="itemIputs" required>
+             <button type="submit" style="background-color: lightgreen;" class="add-cancelbtn" name="submit-update-edit" id="addbtn">USE
           </button>
           </form>
           <button style="background-color: red;" class="add-cancelbtn" id="cancelbnt-update">CANCEL</button>
@@ -124,15 +136,20 @@ if(isset($_POST['submit-update-edit'])){
          <div class="formo1">
             <div id="addtitle"><h4>Update item</h4></div>
            <form action="" method="post" id="formitemadd" enctype="multipart/form-data">
-            <input type="text" name="itemname" id="itemnameid" placeholder="" class="itemIputs" required value="<?php echo $_GET['viewId'];?>"><br>
-            <input type="text" name="category" id="category" placeholder="Category" class="itemIputs" required  value="<?php echo $_GET['catId'];?>"><br>
-            <input type="text" name="quantity" id="quantity" placeholder="Quantity" class="itemIputs" required value="<?php echo $_GET['qu'];?>">
+            <input type="text" name="itemname" id="itemnameid" placeholder="" class="itemIputs" required value="<?php echo $_GET['viewId'];?>""><br>
+            <input type="text" name="category" id="category" placeholder="Category" class="itemIputs" required  value="<?php echo $_GET['catId'];?>""><br>
+            <input type="number" min="1" name="quantity" id="quantity" placeholder="Quantity" class="itemIputs" required value="<?php echo $_GET['qu'];?>">
             <input type="text" name="serial" id="quantity" placeholder="Serial No" class="itemIputs" required value="<?php echo $_GET['serialId'];?>">
-            <input type="text" name="expire" id="quantity" placeholder="Expire date:Eg 2020/01/28" class="itemIputs" required value="<?php echo $_GET['expId'];?>">
+            <input type="text"  name="expire" id="quantity" placeholder="Expire date:Eg 2020/01/28" class="itemIputs" required value="<?php echo $_GET['expId'];?>">
             <textarea name="itemsDecsctrion" id="" cols="30" rows="10" placeholder="Description" class="itemIputsDes" required><?php echo $_GET['decId'];?></textarea><br>
             <input type="file" name="file" id="" class="itemIputs" required><br>
-            <input type="text" name="price-of-item" id="itemprice" placeholder="Price" class="itemIputs" required value="<?php echo $_GET['priceId'];?>"><br>
-            <input type="text" name="item-status" id="item-statussview" placeholder="Status" class="itemIputs" required value="<?php echo $_GET['statId'];?>">
+            <input type="number" min ="1000" name="price-of-item" id="itemprice" placeholder="Price" class="itemIputs" required value="<?php echo $_GET['priceId'];?>"><br>
+            <!-- <input type="text" name="item-status" id="item-statussview" placeholder="Status" class="itemIputs" required value=""> -->
+            <select name="item-status" id="item-statussview" class="itemIputs">
+            <option value="status" selected disabled>Choose status</option>
+            <option value="New">New</option>
+            <option value="Old">Old</option>
+            </select>
              <button type="submit" style="background-color: lightgreen;" class="add-cancelbtn" name="submit-update" id="addbtn">UPDATE
           </button>
           </form>
@@ -167,7 +184,7 @@ if(isset($_POST['submit-update-edit'])){
          ?></span>
             </div>
            <div class="viewNavigation">
-             <button id="edit-btn" class="edit-btn-now">EDIT QUANTITY</button>
+             <button id="edit-btn" class="edit-btn-now">USE ITEM</button>
              <button id="edit-btn-next" class="edit-btn-now">UPDATE ITEM</button>
            </div>
 
@@ -188,6 +205,7 @@ if(isset($_POST['submit-update-edit'])){
            $i_images=$rowOfresualt[7];
            $i_price=$rowOfresualt[8];
            $i_status=$rowOfresualt[9];
+           $unit=$rowOfresualt[13];
            ?>
            <div class="tabledispla">
             <div id="column-one" class="table-sub-update">
@@ -206,7 +224,7 @@ if(isset($_POST['submit-update-edit'])){
                <div id="column-three" class="table-sub-update">
                <div><?php echo $i_name;?></div>
                <div><?php echo $i_category;?></div>
-               <div><?php echo $_GET['qu'];?></div>
+               <div><?php echo $_GET['qu']." ".$unit;?></div>
                <div><?php echo $i_description;?></div>
                <div><?php echo $i_price;?></div>
                <div><?php echo $i_status;?></div>

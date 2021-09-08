@@ -18,12 +18,28 @@ if(!isset($_SESSION['username'])){
   $i_status=$_POST['item-status'];
   $i_description=$_POST['itemsDecsctrion'];
   $i_quantity=$_POST['quantity'];
-  $insertData="INSERT INTO items(i_id,i_serial_no,i_expire_date,i_name,i_category,i_quantity,i_description,i_images,i_price,i_status,i_time_added,whoAddItem,whoUpdate)VALUES(0,'$i_serial','$i_expiredate',' $i_name','$i_category','$i_quantity','$i_description','$i_photo','$i_price','$i_status','$time','$user','')";
-  $excuteinsertData=mysqli_query($connection,$insertData);
-  if($excuteinsertData){
-    move_uploaded_file($i_tmp_Photo_name,"../itemPhoto/".$i_photo);
+  $unit=$_POST['unit'];
+  $time=time();
+  $timeHr=date("Y/m/d");
+  
+  $insertData="INSERT INTO items(i_id,i_serial_no,i_expire_date,i_name,i_category,i_quantity,i_description,i_images,i_price,i_status,i_time_added,whoAddItem,whoUpdate,unit)VALUES(0,'$i_serial','$i_expiredate',' $i_name','$i_category','$i_quantity','$i_description','$i_photo','$i_price','$i_status','$timeHr','$user','','$unit')";
+
+  $check_if_exit="SELECT * FROM `items` WHERE i_name=' $i_name'";
+
+  $re=mysqli_query($connection,$check_if_exit);
+  if($rows=mysqli_fetch_array($re)){
+       $id=$rows[0];
+       $i_quantitys=$rows[5];
+       $updatequatity=$i_quantitys+$i_quantity;
+       $update="UPDATE items SET i_quantity='$updatequatity' WHERE i_id='$id'";
+       mysqli_query($connection,$update);
   }else {
-    echo "Error".mysqli_error($connection);
+    $excuteinsertData=mysqli_query($connection,$insertData);
+    if($excuteinsertData){
+      move_uploaded_file($i_tmp_Photo_name,"../itemPhoto/".$i_photo);
+    }else {
+      echo "Error".mysqli_error($connection);
+    }
   }
  }
 }
@@ -54,23 +70,36 @@ $deleteExcute=mysqli_query($connection,$delete);
     <div class="navigationBar">
     <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis">CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
      <div class="iconTopNavigation">
-         <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
-         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons">
+         <!-- <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
+         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons"> -->
      </div>
 
      <div class="formAdditem" style=" overflow-y: scroll;">
        <div class="formo1">
             <div id="addtitle"><h4>Add item</h4></div>
            <form action="?" method="post" id="formitemadd" enctype="multipart/form-data">
-            <input type="text" name="itemname" id="itemnameid" placeholder=" Item name" class="itemIputs" required><br>
-            <input type="text" name="category" id="category" placeholder="Category" class="itemIputs" required><br>
-            <input type="text" name="quantity" id="quantity" placeholder="Quantity" class="itemIputs" required>
+            <input type="text" name="itemname" id="itemnameid" placeholder=" Item name" class="itemIputs" required"><br>
+            <input type="text" name="category" id="category" placeholder="Category" class="itemIputs" required "><br>
+            <div id="displaysapan">
+            <input type="number" min="1" name="quantity" id="quantity" placeholder="Quantity" class="itemIputs quat" required>
+            <select name="unit" id="unitselect">
+            <option value=""></option>
+              <option value="Kg">Kg</option>
+              <option value="Ltr">liter</option>
+              <option value="Gr">Grm</option>
+            </select>
+            </div>
             <input type="text" name="serial" id="quantity" placeholder="Serial No" class="itemIputs" required>
-            <input type="text" name="expire" id="quantity" placeholder="Expire date:Eg 2020/01/28" class="itemIputs" required>
-            <textarea name="itemsDecsctrion" id="" cols="30" rows="10" placeholder="Description" class="itemIputsDes" required></textarea><br>
+            <input type="date" name="expire" id="quantity" placeholder="Expire date:Eg 2020/01/28" class="itemIputs" required>
+            <textarea name="itemsDecsctrion" id="" cols="30" rows="10" placeholder="Description" class="itemIputsDes" required pattern="[a-zA-Z0-9]+"></textarea><br>
             <input type="file" name="file" id="" class="itemIputs" required><br>
-            <input type="text" name="price-of-item" id="itemprice" placeholder="Price" class="itemIputs" required><br>
-            <input type="text" name="item-status" id="item-statussview" placeholder="Status" class="itemIputs" required>
+            <input type="number" min="1000" name="price-of-item" id="itemprice" placeholder="Price" class="itemIputs" required><br>
+            <!-- <input type="text" name="item-status" id="item-statussview" placeholder="Status" class="itemIputs" required> -->
+            <select name="item-status" id="item-statussview" class="itemIputs" required>
+            <option value="status" selected disabled>Choose status</option>
+            <option value="New">New </option>
+            <option value="Old">Old</option>
+            </select>
            <button type="submit" style="background-color: green;" class="add-cancelbtn" name="submit" id="addbtn">ADD
             </button>
         </form>
@@ -121,8 +150,10 @@ $deleteExcute=mysqli_query($connection,$delete);
           </div>
          <h1 style="text-align: center;" id="itmes">Items presents</h1><hr>
          <?php 
+          $expireTime=time();
+          $dateExpire=date('Y-m-d',$expireTime);
          include("../connection.php");
-         $selectItems="SELECT*FROM items";
+         $selectItems="SELECT * FROM  items WHERE i_expire_date>='$dateExpire' ORDER BY `items`.`i_id` DESC";
          $resultOfselectedItems=mysqli_query($connection,$selectItems);
          while($rowOfresualt=mysqli_fetch_array($resultOfselectedItems)){
            $i_name=$rowOfresualt[3];
@@ -132,8 +163,9 @@ $deleteExcute=mysqli_query($connection,$delete);
            $i_images=$rowOfresualt[7];
            $i_price=$rowOfresualt[8];
            $i_status=$rowOfresualt[9];
-           $i_serialNo=$rowOfresualt[10];
-           $i_expiredateNo=$rowOfresualt[11];
+           $i_serialNo=$rowOfresualt[1];
+           $i_expiredateNo=$rowOfresualt[2];
+           $unit=$rowOfresualt[13];
           ?>
            <div class="tablediplay">
            <div id="column-one" class="table-sub">
@@ -153,9 +185,9 @@ $deleteExcute=mysqli_query($connection,$delete);
              <div id="remaging"><?php 
               if($i_quantity<0){
                  $i_quantity=0;
-                 echo $i_quantity;
+                 echo $i_quantity." ". $unit;
               }else {
-                echo $i_quantity;
+                echo $i_quantity." ". $unit;
               }
            
              ?></div>
@@ -184,11 +216,31 @@ $deleteExcute=mysqli_query($connection,$delete);
         </div>
     </div>
 </div>
+<script src="../myscript/jQuerrylibarary.js"></script>
 <script src="../myscript/home.js"></script>
 <script src="../myscript/store.js"></script>
 <script src="../myscript/users.js"></script>
 <script>
+$(document).ready(function(){
+            function fetchdata(){
+                    $.ajax({
+                        url:"checkingdb.php",
+                        method:"POST",
+                        data:{key:"done"},
+                        cashe:false,
+                        success:function(datamess){
+                            console.log(datamess);
+                        }
+                    })
+                } 
+            setInterval(function(){
+                
+            },2000);
 
+            fetchdata();
+        });
+
+        
 </script>
 </body>
 </html>

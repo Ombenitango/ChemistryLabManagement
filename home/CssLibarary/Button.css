@@ -122,3 +122,59 @@
     font-size: small;
     padding: 3px;
 }
+
+.round {
+    border-radius: 50%;
+}
+
+.round._1 {
+    border-radius: 45%;
+}
+
+.round._2 {
+    border-radius: 40%;
+}
+
+.round._3 {
+    border-radius: 35%;
+}
+
+.round._4 {
+    border-radius: 30%;
+}
+
+.round {
+    border-radius: 25%;
+}
+
+.round._5 {
+    border-radius: 20%;
+}
+
+.round._6 {
+    border-radius: 15%;
+}
+
+.round._7 {
+    border-radius: 10%;
+}
+
+.round._8 {
+    border-radius: 5%;
+}
+
+.round._9 {
+    border-radius: 4%;
+}
+
+.round._10 {
+    border-radius: 3%;
+}
+
+.round._11 {
+    border-radius: 2%;
+}
+
+.round._11 {
+    border-radius: 1%;
+}

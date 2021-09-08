@@ -26,8 +26,8 @@ if(!isset($_SESSION['username'])){
     <div class="navigationBar">
     <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis">CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
      <div class="iconTopNavigation">
-         <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
-         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons">
+         <!-- <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
+         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons"> -->
      </div>
     </div>
     <div class="wholecontainer">  
@@ -99,10 +99,11 @@ if(!isset($_SESSION['username'])){
            include("../connection.php");
             if(isset($_GET['name'])){
                 $itmenamew=$_GET['name'];
-                 $slectiFromeitmes="SELECT i_quantity FROM items WHERE i_name='$itmenamew'";
+                 $slectiFromeitmes="SELECT * FROM items WHERE i_name='$itmenamew'";
                  $selectFertQuatity=mysqli_query($connection,$slectiFromeitmes);
                 $row01=mysqli_fetch_assoc($selectFertQuatity);
                 $quantityfromitems=$row01['i_quantity'];
+                $unit=$row01['unit'];
                 ?>
            <div id="displaydate">
            <span id="imagescancle"><img src="../icons/cancel_48px.png" alt="" srcset="" width="30px" height="30px
@@ -110,9 +111,9 @@ if(!isset($_SESSION['username'])){
                  <p class="itmestext"><?php echo $itmenamew;?></p>
                  <p class="itmestext">Quantity remained:<?php if($quantityfromitems<=0){
                    $quantityfromitems=0; 
-                  echo $quantityfromitems; 
+                  echo $quantityfromitems." ".$unit; 
                  }else{
-                     echo $quantityfromitems; 
+                     echo $quantityfromitems." ".$unit; 
                  } 
                  
                  ?></p>

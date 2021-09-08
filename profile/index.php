@@ -21,7 +21,7 @@ if(!isset($_SESSION['username'])){
 <body>
 <div class="containerbody">
     <div class="navigationBar">
-    <h1 id="chemistry-logohome">CHEMISTRY LABORATORY MANAGEMENT SYSTEM</h1>
+    <h1 id="chemistry-logohome">LABORATORY MANAGEMENT SYSTEM</h1>
      <div class="iconTopNavigation">
          <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
          <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons">

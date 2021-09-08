@@ -22,10 +22,10 @@ if(!isset($_SESSION['username'])){
 <body>
 <div class="containerbody">
     <div class="navigationBar">
-    <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis">CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
+    <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis"> CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
      <div class="iconTopNavigation">
-         <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="notificationsss">
-         <div class="toicons"><img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons"></div>
+         <!-- <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="notificationsss">
+         <div class="toicons"><img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons"></div> -->
      </div>
     </div>
     <div class="wholecontainer"> 
@@ -49,16 +49,22 @@ if(!isset($_SESSION['username'])){
              $excuteQuery=mysqli_query($connection,$usersSelection);
              while($row=mysqli_fetch_array($excuteQuery)){
                  $name=$row[2];
-                  echo $name;
              }
+
+             ?>
+             <a href="../logout.php">Logout</a>
+             <?
             }else{
                 $usename=$_SESSION['username'][0];
                 $usersSelection="SELECT*FROM users WHERE username='$usename'";
                 $excuteQuery=mysqli_query($connection,$usersSelection);
                 while($row=mysqli_fetch_array($excuteQuery)){
                     $name01=$row[2];
-                     echo $name01;
+                    
                 }
+                ?>
+                 <a href="../logout.php">Logout</a>
+                <?
             }
 
            

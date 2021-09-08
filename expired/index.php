@@ -22,8 +22,8 @@ if(!isset($_SESSION['username'])){
     <div class="navigationBar">
     <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis">CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
      <div class="iconTopNavigation">
-         <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
-         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons">
+         <!-- <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" class="toicons">
+         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons"> -->
      </div>
     </div>
     <div class="wholecontainer">  
@@ -73,7 +73,7 @@ if(!isset($_SESSION['username'])){
            <div class="New">
             <?php 
             $time=time();
-            $t=date('Y/m/d',$time);
+            $t=date('Y-m-d',$time);
              include('../connection.php');
              $selectNew="SELECT*FROM items WHERE i_status='new'AND i_expire_date>='$t'";
              $resualt=mysqli_query($connection,$selectNew);
@@ -109,7 +109,7 @@ if(!isset($_SESSION['username'])){
            <div class="Old">
            <?php 
             $time=time();
-            $t=date('Y/m/d',$time);
+            $t=date('Y-m-d',$time);
              include('../connection.php');
              $selectNew="SELECT*FROM items WHERE i_status='old'AND i_expire_date>='$t' ";
              $resualt=mysqli_query($connection,$selectNew);
@@ -148,21 +148,18 @@ if(!isset($_SESSION['username'])){
 
            <?php 
          $expireTime=time();
-         $dateExpire=date('Y/m/d',$expireTime);
+         $dateExpire=date('Y-m-d',$expireTime);
          include("../connection.php");
-         $selectItems="SELECT*FROM items WHERE i_expire_date<='$dateExpire'";
+         $selectItems="SELECT*FROM expire";
          $resultOfselectedItems=mysqli_query($connection,$selectItems);
          while($rowOfresualt=mysqli_fetch_array($resultOfselectedItems)){
-          $i_name=$rowOfresualt[3];
-          $i_category=$rowOfresualt[4];
-          $i_quantity=$rowOfresualt[5];
+          $i_name=$rowOfresualt[1];
+          $i_category=$rowOfresualt[3];
+          $i_quantity=$rowOfresualt[4];
           $i_description=$rowOfresualt[6];
-          $i_images=$rowOfresualt[7];
-          $i_price=$rowOfresualt[8];
-          $serialNo=$rowOfresualt[1];
+          $i_price=$rowOfresualt[5];
+          $serialNo=$rowOfresualt[6];
           $exprie=$rowOfresualt[2];
-          $timeAdded=$rowOfresualt[10];
-          $timeAddedHr=$rowOfresualt[11];
           ?>
                  <div class="table">
                    <div class="tables-sumb"><img src="../itemPhoto/<?php echo  $i_images; ?>" alt="" srcset="" width="100%" height="200px"></div>

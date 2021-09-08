@@ -50,8 +50,8 @@ if(isset($_POST['submitdata'])){
     <div class="navigationBar">
     <h1 id="chemistry-logohome"> <img src="../icons/menu_64px.png" alt="" srcset="" width="35px" height="35px" id="displaymenus"><span id="clmsdis">CHEMISTRY LABORATORY MANAGEMENT SYSTEM </span><span id="scmsshow">CLMS</span></h1></h1>
      <div class="iconTopNavigation">
-         <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" id="notificationsss">
-         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons">
+         <!-- <img src="../icons/appointment_reminders_40px.png" alt="" srcset="" width="30px" height="30px" id="notificationsss">
+         <img src="../icons/circled_user_male_48px.png" alt="" srcset="" width="30px" height="30px" class="toicons" id="prifile-icons"> -->
      </div>
     </div>
     <div class="wholecontainer">  

@@ -7,7 +7,12 @@ if(isset($_POST['submit'])){
   $select="SELECT*FROM users WHERE username='$username'AND password='$password'";
   $resualtSelect=mysqli_query($connection,$select);
   if(mysqli_num_rows($resualtSelect)==0){
-    echo "not registered";
+    ?>
+    <div class="errormessage">
+       <strong class="Register">Not Registered</strong>
+       <strong class="Registerw">Cancel</strong>
+    </div>
+    <?
   }else {
     header("location:home/");  
     $_SESSION['username']=array($username,$password);
@@ -22,6 +27,37 @@ if(isset($_POST['submit'])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>clms</title>
     <link rel="stylesheet" href="./mystyle/index.css">
+    <style>
+    .errormessage{
+      background-color:red;
+      width:50%;
+      height:50px;
+      display:flex;
+      flex-direction:row;
+      justify-content:center;
+      align-items:center;
+      font-weight:blod;
+      transform: translate3d(20rem,10rem,0rem);
+      
+    }
+   .Register{
+      flex:5;
+      display:flex;
+      flex-direction:row;
+      justify-content:center;
+      align-items:center;
+      font-weight:blod;
+   }
+   .Registerw{
+      flex:1;
+      cursor: pointer;
+      display:flex;
+      flex-direction:row;
+      justify-content:center;
+      align-items:center;
+      font-weight:blod;
+}
+    </style>
 </head>
 <body>
   <div class="container">
@@ -37,5 +73,10 @@ if(isset($_POST['submit'])){
   </fieldset>
   </div>
   </div>
+  <script>
+  document.querySelector(".Registerw").addEventListener("click",()=>{
+    document.querySelector(".errormessage").style.display="none";
+  })
+  </script>
 </body>
 </html>
